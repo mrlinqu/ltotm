@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Одноразка</title>
+        {{css}}
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <!-- FORM VIEW -->
+                <div id="formView" class="hidden">
+                    <textarea id="textInput" placeholder="Вставьте или введите секретное сообщение сюда…" maxlength="50000"></textarea>
+                    <div class="char-count">
+                        <span id="charCount">0</span> / 50 000
+                    </div>
+
+                    <div class="section-title">Срок жизни ссылки</div>
+                    <div class="duration-options">
+                        <button class="duration-btn active" data-hours="24" onclick="selectDuration(this)">
+                            <span class="hours">24</span>
+                            <span class="label-sub">часа</span>
+                        </button>
+                        <button class="duration-btn" data-hours="48" onclick="selectDuration(this)">
+                            <span class="hours">48</span>
+                            <span class="label-sub">часов</span>
+                        </button>
+                        <button class="duration-btn" data-hours="72" onclick="selectDuration(this)">
+                            <span class="hours">72</span>
+                            <span class="label-sub">часа</span>
+                        </button>
+                    </div>
+
+                    <button class="submit-btn" id="submitBtn" onclick="createLink()">
+                        Создать ссылку
+                    </button>
+                </div>
+
+                <!-- RESULT VIEW -->
+                <div id="resultView" class="hidden">
+                    <div class="link-field">
+                        <span class="link-text" id="resultLink"></span>
+                        <button class="copy-btn" id="copyBtn" onclick="copyLink()">
+                            <svg id="copyIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg id="checkIcon" style="display: none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span id="copyBtnText">Копировать</span>
+                        </button>
+                    </div>
+
+                    <div class="expiry-info">
+                        Ссылка будет доступна до <span id="expiryDate"></span>
+                    </div>
+
+                    <button class="back-btn" onclick="resetForm()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Создать ещё одну
+                    </button>
+                </div>
+
+                <div id="receiveMessage" class="hidden">
+                    <button class="submit-btn" id="receiveBtn" onclick="receiveMessage()">
+                        Получить сообщение
+                    </button>
+                </div>
+
+                <div id="receivedMessage" class="hidden">
+                    <div class="message-field">
+                        <span class="message-text" id="resultMessage"></span>
+                        <button class="copy-btn" id="copyMsgBtn" onclick="copyMsg()">
+                            <svg id="copyMsgIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <svg id="checkMsgIcon" style="display: none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span id="copyMsgBtnText">Копировать</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+        <div id="toastErr" class="toast-err"></div>
+
+        {{js}}
+    </body>
+</html>
