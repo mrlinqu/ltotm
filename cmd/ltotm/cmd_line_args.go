@@ -1,6 +1,9 @@
 package main
 
-import "flag"
+import (
+	"flag"
+	"os"
+)
 
 type cmdArgs struct {
 	iface      string
@@ -13,13 +16,13 @@ type cmdArgs struct {
 func parseArgs() cmdArgs {
 	ret := cmdArgs{}
 
-	flag.StringVar(&ret.iface, "iface", "0.0.0.0", "listen interface")
-	flag.StringVar(&ret.port, "port", "", "listen port")
+	flag.StringVar(&ret.iface, "iface", envOrDefault("LTOTM_IFACE", "0.0.0.0"), "listen interface")
+	flag.StringVar(&ret.port, "port", envOrDefault("LTOTM_PORT", ""), "listen port")
 
-	flag.StringVar(&ret.tlsCert, "cert", "", "tls cert")
-	flag.StringVar(&ret.tlsKey, "key", "", "tls key")
+	flag.StringVar(&ret.tlsCert, "cert", envOrDefault("LTOTM_TLS_CERT", ""), "tls cert")
+	flag.StringVar(&ret.tlsKey, "key", envOrDefault("LTOTM_TLS_KEY", ""), "tls key")
 
-	flag.StringVar(&ret.storageDir, "dir", "./storage", "path to storage dir")
+	flag.StringVar(&ret.storageDir, "dir", envOrDefault("LTOTM_STORAGE", "./data"), "path to storage dir")
 
 	flag.Parse()
 
@@ -32,4 +35,11 @@ func parseArgs() cmdArgs {
 	}
 
 	return ret
+}
+
+func envOrDefault(name, defaultValue string) string {
+	if value, ok := os.LookupEnv(name); ok {
+		return value
+	}
+	return defaultValue
 }

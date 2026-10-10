@@ -30,7 +30,6 @@ func main() {
 
 	fileSystem := os.DirFS(root)
 
-	//includes := map[string]*bytes.Buffer{}
 	css := strings.Builder{}
 	js := strings.Builder{}
 
@@ -101,21 +100,4 @@ func main() {
 	}
 
 	fmt.Printf("ok\n")
-
-	// buf := &bytes.Buffer{}
-
-	// f, err := os.Open(fullPath)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// if err := m.Minify(ext, buf, f); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// if err := f.Close(); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	//fmt.Println(includes)
 }

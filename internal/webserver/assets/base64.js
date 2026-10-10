@@ -1,3 +1,4 @@
+/* https://github.com/feross/base64-js */
 "use strict";
 
 var lookup = [];
